@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RQC Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .card-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            text-align: center;
+            padding: 2rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 30px;
+        }
+        .form-control {
+            border-radius: 25px;
+            border: 2px solid #ddd;
+            padding: 10px 20px;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="h2 mb-0">RQC Data</h1>
+                        <p class="mb-0">Search for data by date</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="search_date" class="form-label">Enter Date (YYYY-MM-DD)</label>
+                                <input type="date" class="form-control" id="search_date" name="search_date">
+                            </div>
+                            <div class="mb-3">
+                                <label for="search_job" class="form-label">Enter Job Name</label>
+                                <input type="text" class="form-control" id="search_job" name="search_job" placeholder="Enter job name...">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg me-2">Search</button>
+                                <button type="submit" name="show_all" value="1" class="btn btn-outline-primary btn-lg">Show All Data</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
