@@ -12,23 +12,32 @@ class ExcelViewer(QtWidgets.QMainWindow):
         self.setWindowTitle('RQC Data - Desktop Viewer')
         self.resize(1000, 700)
 
+        # Set default font for better visibility
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        self.setFont(font)
+
         self.setStyleSheet("""
             QMainWindow {
-                background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e3f2fd, stop:1 #bbdefb);
+                background-color: #2b2b2b;
+                color: #ffffff;
             }
             QGroupBox {
                 font-weight: bold;
-                border: 2px solid #2196f3;
+                border: 2px solid #4a90e2;
                 border-radius: 5px;
                 margin-top: 1ex;
+                color: #ffffff;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
                 left: 10px;
                 padding: 0 5px 0 5px;
+                color: #ffffff;
             }
             QPushButton {
-                background-color: #2196f3;
+                background-color: #4a90e2;
                 color: white;
                 border: none;
                 padding: 8px 16px;
@@ -36,33 +45,36 @@ class ExcelViewer(QtWidgets.QMainWindow):
                 font-size: 14px;
             }
             QPushButton:hover {
-                background-color: #1976d2;
+                background-color: #357abd;
             }
             QPushButton:pressed {
-                background-color: #0d47a1;
+                background-color: #2c5aa0;
             }
             QLineEdit, QDateEdit {
-                border: 1px solid #ccc;
+                border: 1px solid #555;
                 border-radius: 4px;
                 padding: 4px;
-                background-color: white;
+                background-color: #3a3a3a;
+                color: #ffffff;
             }
             QCheckBox {
+                color: #ffffff;
                 font-size: 14px;
             }
             QLabel {
-                color: #333;
+                color: #ffffff;
             }
             QTableWidget {
-                gridline-color: #ddd;
-                background-color: white;
-                alternate-background-color: #f9f9f9;
+                gridline-color: #555;
+                background-color: #3a3a3a;
+                alternate-background-color: #454545;
+                color: #ffffff;
             }
             QHeaderView::section {
-                background-color: #2196f3;
+                background-color: #4a90e2;
                 color: white;
                 padding: 4px;
-                border: 1px solid #ddd;
+                border: 1px solid #555;
             }
         """)
 
@@ -147,9 +159,10 @@ class ExcelViewer(QtWidgets.QMainWindow):
         button_layout.addWidget(self.back_button)
         layout.addLayout(button_layout)
 
-        self.search_button.clicked.connect(self.on_search)
-        self.reset_button.clicked.connect(self.on_reset)
-        self.back_button.clicked.connect(lambda: self.stack.setCurrentWidget(self.home_page))
+        self.search_job.textChanged.connect(self.on_search)
+        self.search_date.dateChanged.connect(self.on_search)
+        self.date_filter_checkbox.stateChanged.connect(self.on_search)
+        self.job_filter_checkbox.stateChanged.connect(self.on_search)
 
         self.notice = QtWidgets.QLabel('')
         self.notice.setStyleSheet('padding: 8px; font-weight: bold; color: #388e3c;')
